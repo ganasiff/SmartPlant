@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from SCADA import views
+from SCADA import views as SCADA_views
+from cuentas_usuario import views as cuentas_views
 #import SCADA
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.indice, name='Pagina Principal'),
+    path('',SCADA_views.indice, name='Pagina Principal'),
+    path('login/',cuentas_views.login_view),
+    path('logout/',cuentas_views.logout_view),
 ]
