@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h2 class="h2 text-light">Info Local</h2>
+          <div class="table-responsive bg-light opacity-75 rounded">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Rol</th>
+                  <th>Nombre</th>
+                  <th>Descripcion</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td> id </td>
+                  <td>{{ role }}</td>
+                  <td>{{name}}</td>
+                  <td>{{description}}</td>
+                  <td>ok</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+{% endblock content %}

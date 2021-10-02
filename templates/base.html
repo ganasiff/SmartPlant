@@ -48,7 +48,11 @@
             {% if request.user.is_authenticated %}
             <button type="button" class="btn btn-secondary" onclick="window.history.back()" >Volver</button>
             <button type="button" class="btn btn-secondary" onclick="window.location.replace('/')" >Inicio</button>
-            <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+            <form class="accordion-header">
+              <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" name="search">
+              <input type="submit" class="btn btn-secondary" >Buscar</button>
+            </form>
+            
             <ul class="navbar-nav px-3">
               <li class="nav-item text-nowrap">
                 <a class="nav-link" href="/logout">Cerrar Sesion</a>

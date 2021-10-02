@@ -22,6 +22,9 @@ from cuentas_usuario import views as cuentas_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',SCADA_views.indice, name='Pagina Principal'),
-    path('login/',cuentas_views.login_view),
-    path('logout/',cuentas_views.logout_view),
+    path('login/',cuentas_views.login_view, name='Iniciar Sesion'),
+    path('logout/',cuentas_views.logout_view,name='Cerrar Sesion'),
+    path('register/', cuentas_views.register_view, name='Registrar Usuario'),
+    path('settings/',SCADA_views.settings_scada_search,name='Configuraciones'),
+    path('settings/<int:id>',SCADA_views.settings_scada,name='Configuracion'),
 ]

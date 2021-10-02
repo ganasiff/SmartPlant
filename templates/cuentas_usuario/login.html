@@ -26,15 +26,11 @@
                     {% if not request.user.is_authenticated %}
                         <form action="" id="login-form" method="post">
                             {% csrf_token %}
-                            {% if error %}
-                            <p style="color: red;">
-                                {{error}}
-                            </p>
-                            {% endif  %}
-                            
+                         {{ form.as_p}}
+                        <!--
                             <div class="mb-4">
                                 <label for="username" class="form-label">Username/Email</label>
-                                <input class="form-control" type="text" name="username" id="username"><!--Django Model usa el Name en el metodo POST.get()-->
+                                <input class="form-control" type="text" name="username" id="username">Django Model usa el Name en el metodo POST.get()
                             </div>
                             <div class="mb-4">
                                 <label for="password" class="form-label">Password</label>
@@ -44,9 +40,11 @@
                                 <input class="form-check-input" type="checkbox" name="recordar" id="recordar">
                                 <label for="recordar">Recordar Contraseña</label>
                             </div>
+                        -->
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary">Login</button>
                             </div>
+                            <p class="p-3"> No tienes usuario? Te gustaria <a href="/register/">Registrarse</a>? </p>
                         </form>
                     {% else %}
                     <p class="p-3"> Ya has iniciado sesion. Te gustaria <a href="/logout/">Cerrar Sesion</a>? </p>
