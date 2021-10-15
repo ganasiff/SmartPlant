@@ -6,56 +6,8 @@
 
 <div class="container-fluid">
     <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
-        <div class="sidebar-sticky ">
-            
-          <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link inactive text-white" href="#">
-                  <span data-feather="clock"></span>
-                  <p>System Time :</p>
-                  <p>{{ System_date }} {{ System_time }}</p>  
-                </a>
-              </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="/">
-                <span data-feather="home"></span>
-                Inicio
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="server"></span>
-                Network
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/settings">
-                <span data-feather="settings"></span>
-                Configuracion
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="users"></span>
-                Usuarios
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="bar-chart-2"></span>
-                Reportes
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="layers"></span>
-                Integraciones
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      {% include "navbar.html" %}
+
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
           <h1 class="h2"><p class="text-white ">Dashboard</p></h1>
@@ -88,30 +40,20 @@
                 </tr>
               </thead>
               <tbody>
+                {% for x in list %}
                 <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
+                  <td>{{x.id}} </td>
+                  <td>{{ x.role }}</td>
+                  <td>{{ x.name}}</td>
+                  <td>{{x.description}}</td>
+                  <td>{{ x.status}}</td>
                 </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>
-        <div class="container ">
-            <div class="table-responsive justify-content-center mt-1 opacity-100 ">
-               <!-- <div class="col-1g-6 col-md-10 col-sm-10 "> -->
-                    <div class="card shadow rounded">
-                        <div class="card-body">
-                            <form>
-                                <input type="text" name='query'/>
-                                <input type="submit"/>
-                                
-                            </form>
-                        </div>
-                    </div>
-                <!--</div>-->
-            </div>
+
+    
         </div>
       </main>
     </div>
@@ -126,7 +68,7 @@
           labels:["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
           datasets: [{
             label: 'Test',
-            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+            data: {{ dj_chart }},
             lineTension: 0,
             backgroundColor: 'transparent',
             borderColor: '#007bff',

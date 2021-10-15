@@ -21,10 +21,11 @@ from cuentas_usuario import views as cuentas_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',SCADA_views.indice, name='Pagina Principal'),
+    path('',SCADA_views.indice, name='home'),
     path('login/',cuentas_views.login_view, name='Iniciar Sesion'),
     path('logout/',cuentas_views.logout_view,name='Cerrar Sesion'),
     path('register/', cuentas_views.register_view, name='Registrar Usuario'),
-    path('settings/',SCADA_views.settings_scada_search,name='Configuraciones'),
-    path('settings/<int:id>',SCADA_views.settings_scada,name='Configuracion'),
+    path('settings/',SCADA_views.settings_scada,name='settings'),
+    path('settings/edit/<int:pk>',SCADA_views.Settings_edit.as_view(),name='edit_config'),
+    path('settings/<int:pk>/remove',SCADA_views.Settings_delete.as_view(),name='delete_config'),
 ]

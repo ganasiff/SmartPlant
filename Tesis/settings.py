@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-iwzv&d08cccxmq8c3m&h_86k@e=%boy-q4!frj=k76^js!j@pa
 DEBUG = True
 
 #ALLOWED_HOSTS = []
-ALLOWED_HOSTS = [ gethostname(), gethostbyname(gethostname()),'192.168.0.115','localhost'] 
+ALLOWED_HOSTS = [ gethostname(), gethostbyname(gethostname()),'192.168.0.116','localhost'] 
 
 # Application definition
 
