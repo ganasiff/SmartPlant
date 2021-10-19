@@ -24,7 +24,8 @@ print(STATIC_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
+DEPLOY_ROLE=os.environ.get("DEPLOY_ROLE")
+print(DEPLOY_ROLE)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-iwzv&d08cccxmq8c3m&h_86k@e=%boy-q4!frj=k76^js!j@pa'
 
@@ -88,18 +89,28 @@ WSGI_APPLICATION = 'Tesis.wsgi.application'
    #     'NAME': BASE_DIR / 'db.sqlite3',
 #    }
 #}
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432,
+if(DEPLOY_ROLE=="MASTER_NODE"):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': 'db',
+            'PORT': 5432,
+        }
     }
-}
-
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': '192.168.0.116',
+            'PORT': 5432,
+        }
+    }
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 

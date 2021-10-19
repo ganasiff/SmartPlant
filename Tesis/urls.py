@@ -26,6 +26,7 @@ urlpatterns = [
     path('logout/',cuentas_views.logout_view,name='Cerrar Sesion'),
     path('register/', cuentas_views.register_view, name='Registrar Usuario'),
     path('settings/',SCADA_views.settings_scada,name='settings'),
+    path('settings/search/',SCADA_views.settings_scada_search,name='search_settings'),
     path('settings/edit/<int:pk>',SCADA_views.Settings_edit.as_view(),name='edit_config'),
     path('settings/<int:pk>/remove',SCADA_views.Settings_delete.as_view(),name='delete_config'),
 ]

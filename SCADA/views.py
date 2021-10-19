@@ -66,12 +66,15 @@ class Settings_delete(DeleteView):
 
 def settings_scada_search(request):
     query_dict = request.GET
-    query = query_dict.get("search")
+    try:
+        query = query_dict.get("search")
+    except:
+        query=None
     obj_settings= None
     if query is not None:
         obj_settings =Settings.objects.get(id=query)
 
     context = {
-        "object" : obj_settings
+        "object_list" : obj_settings
     }
     return render(request, "Scada/search.html", context=context)
