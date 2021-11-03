@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-iwzv&d08cccxmq8c3m&h_86k@e=%boy-q4!frj=k76^js!j@pa
 DEBUG = True
 
 #ALLOWED_HOSTS = []
-ALLOWED_HOSTS = [ gethostname(), gethostbyname(gethostname()),'192.168.0.116','localhost'] 
+ALLOWED_HOSTS = [ gethostname(), gethostbyname(gethostname()),'192.168.0.115','localhost'] 
 
 # Application definition
 
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'SCADA',
     'cuentas_usuario',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -90,27 +91,26 @@ WSGI_APPLICATION = 'Tesis.wsgi.application'
 #    }
 #}
 if(DEPLOY_ROLE=="MASTER_NODE"):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'postgres',
-            'USER': 'postgres',
-            'PASSWORD': 'postgres',
-            'HOST': 'db',
-            'PORT': 5432,
-        }
-    }
+    db_host_ip='db'
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'postgres',
-            'USER': 'postgres',
-            'PASSWORD': 'postgres',
-            'HOST': '192.168.0.116',
-            'PORT': 5432,
-        }
+    db_host_ip='192.168.0.116'
+
+DATABASES = {
+    'default': {},
+    'dcs_db': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': db_host_ip,
+        'PORT': 5432,
+    },
+    'local_db': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -149,6 +149,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR,]
+
+DATABASE_ROUTERS=['routers.db_routers.AuthRouter','routers.db_routers.NodeRouter',]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

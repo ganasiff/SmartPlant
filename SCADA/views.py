@@ -1,15 +1,19 @@
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.shortcuts import redirect, render
-from django.views.generic import UpdateView, DeleteView
+from django.views.generic import ListView,CreateView ,UpdateView, DeleteView
 from django.urls import reverse_lazy
 
-from .forms import SettingsForm
+from .forms import SettingsForm, SettingsFormEdit
 from .models import Settings
-
 from datetime import datetime, date
-# Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, response
 import random
+
+#DjangoREST
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
 
 def indice(request):
 
@@ -52,12 +56,27 @@ def settings_scada(request,id=None):
 
     return render(request,"Scada/settings.html", context=context)
 #Class based view
+#@login_required
+@method_decorator(login_required, name='dispatch')
+class Settings_Create(CreateView):
+    model = Settings
+    form_class= SettingsForm
+    template_name='Scada/settings_create.html'
+    success_url= reverse_lazy('settings')
+
+@method_decorator(login_required, name='dispatch')
+class Settings_list(ListView):
+    model=Settings
+    template_name="Scada/settings_list.html"
+
+
 class Settings_edit(UpdateView):
     model = Settings
-    form_class = SettingsForm
+    form_class = SettingsFormEdit
     template_name = 'Scada/settings_edit.html'
     #fields = ['role','name','description','status']
     
+
 class Settings_delete(DeleteView):
     model = Settings   
     template_name = 'Scada/settings_delete.html'
@@ -78,3 +97,7 @@ def settings_scada_search(request):
         "object_list" : obj_settings
     }
     return render(request, "Scada/search.html", context=context)
+
+class HelloWorld(APIView):
+    def get(self,request):
+        return Response('Hola Mundo...')

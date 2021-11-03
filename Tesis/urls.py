@@ -26,7 +26,10 @@ urlpatterns = [
     path('logout/',cuentas_views.logout_view,name='Cerrar Sesion'),
     path('register/', cuentas_views.register_view, name='Registrar Usuario'),
     path('settings/',SCADA_views.settings_scada,name='settings'),
+    path('settings/list',SCADA_views.Settings_list.as_view(),name='settings_list'),
+    path('settings/create',SCADA_views.Settings_Create.as_view(),name='settings_create'),
     path('settings/search/',SCADA_views.settings_scada_search,name='search_settings'),
     path('settings/edit/<int:pk>',SCADA_views.Settings_edit.as_view(),name='edit_config'),
     path('settings/<int:pk>/remove',SCADA_views.Settings_delete.as_view(),name='delete_config'),
+    path('hello_world',SCADA_views.HelloWorld.as_view()),
 ]

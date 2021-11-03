@@ -17,6 +17,7 @@
   {% endif %}
         <h2 class="h2 text-light">Info Local</h2>
           <div class="table-responsive bg-light opacity-75 rounded">
+            {% if object_list %}
             <table class="table table-striped table-sm">
               <thead>
                 <tr>
@@ -29,7 +30,8 @@
                 </tr>
               </thead>
               <tbody>
-                {% for x in list %}
+                
+                {% for x in object_list %}
                 <tr>
                   <td>
                     {{x.pk}}
@@ -49,11 +51,11 @@
                 {% endfor %}
               </tbody>
             </table>
+            {% else %}
+            <h1>No hay Nodos en la Base de datos</h1>
+            {% endif %}
           </div>
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <p></p>
-          <button type="button" class="btn btn-primary" onclick="window.location.replace('/settings/create')" >Crear Nodo Manualmente</button>
-        </div>
+        
       </main>
     </div>
 </div>
