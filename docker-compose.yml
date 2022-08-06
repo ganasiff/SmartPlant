@@ -11,9 +11,16 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
+  redis:
+    image: redis
+    command: redis-server
+    ports:
+      - '6379:6379'
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    #command: python manage.py runserver 0.0.0.0:8000 #For debug
+    command: daphne -b 0.0.0.0 -p 8000 Tesis.asgi:application
+    #command: gunicorn -c config/gunicorn/dev.py #For deploy
     volumes:
       - .:/code    
     ports:
@@ -22,5 +29,4 @@ services:
       - DEPLOY_ROLE=${DEPLOY_ROLE}
     depends_on:
       - db
-      
 

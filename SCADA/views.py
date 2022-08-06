@@ -100,4 +100,4 @@ def settings_scada_search(request):
 
 class HelloWorld(APIView):
     def get(self,request):
-        return Response('Hola Mundo...')
+        return Response('Hola Juan Carrlos...')

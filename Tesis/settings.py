@@ -27,13 +27,26 @@ print(STATIC_DIR)
 DEPLOY_ROLE=os.environ.get("DEPLOY_ROLE")
 print(DEPLOY_ROLE)
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-iwzv&d08cccxmq8c3m&h_86k@e=%boy-q4!frj=k76^js!j@pa'
-
+#SECRET_KEY = 'django-insecure-iwzv&d08cccxmq8c3m&h_86k@e=%boy-q4!frj=k76^js!j@pa'
+SECRET_KEY="zl+rBk?<>8PC!B.i#yCr9aaWK2FWI3dKa9B2D<>*nB6T3*a#7q"
+"""
+try:
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    print("Getting Secret Key")
+    
+    if SECRET_KEY == None:
+        print("Secret_key: is None")
+        raise KeyError
+    else:
+        print("Secret_key: "+SECRET_KEY)
+except KeyError as e:
+    raise RuntimeError("Could not find a SECRET_KEY in environment") from e
+"""
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 #ALLOWED_HOSTS = []
-ALLOWED_HOSTS = [ gethostname(), gethostbyname(gethostname()),'192.168.0.115','localhost'] 
+ALLOWED_HOSTS = [ gethostname(), gethostbyname(gethostname()),'192.168.0.115','localhost','192.168.9.149'] 
 
 # Application definition
 
@@ -47,6 +60,7 @@ INSTALLED_APPS = [
     'SCADA',
     'cuentas_usuario',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -78,7 +92,20 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Tesis.wsgi.application'
+
+
+#WSGI_APPLICATION = 'Tesis.wsgi.application'
+ASGI_APPLICATION = 'Tesis.asgi.application'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+               'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES':(
+                'rest_framework.permissions.IsAuthenticated',
+    ),
+
+}
 
 
 # Database

@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from SCADA import views as SCADA_views
 from cuentas_usuario import views as cuentas_views
+from rest_framework.authtoken import views
+
 #import SCADA
 
 urlpatterns = [
@@ -32,4 +34,5 @@ urlpatterns = [
     path('settings/edit/<int:pk>',SCADA_views.Settings_edit.as_view(),name='edit_config'),
     path('settings/<int:pk>/remove',SCADA_views.Settings_delete.as_view(),name='delete_config'),
     path('hello_world',SCADA_views.HelloWorld.as_view()),
+    
 ]
